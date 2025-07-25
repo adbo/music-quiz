@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Quiz Revolution</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- GŁÓWNY KONTENER APLIKACJI -->
+    <div id="app-container">
+        <!-- Warstwa wideo (zawsze w tle) -->
+        <div id="video-background">
+            <div id="video-wrapper">
+                <div id="player"></div>
+                <div id="tooltip-blocker" title=" "></div>
+            </div>
+        </div>
+
+        <!-- Warstwa interfejsu (zmienia się w zależności od fazy) -->
+        <div id="ui-layer">
+            <!-- Faza 1: Oglądanie wideo -->
+            <div id="video-phase-ui" class="ui-phase active">
+                <div id="video-progress-container">
+                    <div id="video-progress-bar"></div>
+                </div>
+                <p id="question-text-overlay"></p>
+            </div>
+
+            <!-- Faza 2: Odpowiadanie -->
+            <div id="answer-phase-ui" class="ui-phase">
+                <h2 id="current-player-turn"></h2>
+                <div id="answer-buttons" class="btn-grid"></div>
+                <div id="answer-timer-container">
+                    <div id="answer-timer-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAKŁADKI (SETUP, WYNIKI, GOTOWOŚĆ) -->
+    <div id="setup-screen" class="overlay active">
+        <div class="overlay-content">
+            <h1>Music Quiz</h1>
+            <p>Setup your game to start.</p>
+            <form id="player-setup-form">
+                 <div class="form-group">
+                    <label for="player-count">Number of Players (1-8)</label>
+                    <input type="number" id="player-count" value="2" min="1" max="8">
+                </div>
+                <div id="player-names-container"></div>
+                <div class="form-group">
+                    <label>Select Playlist</label>
+                    <div id="playlist-selection" class="playlist-selector">
+                        <button type="button" class="btn playlist-btn active" data-playlist="songs.js">Playlist 1</button>
+                        <button type="button" class="btn playlist-btn" data-playlist="songs2.js">Playlist 2</button>
+                    </div>
+                </div>
+                <button id="setup-start-button" class="btn btn-primary" type="submit" disabled>Loading...</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="ready-screen" class="overlay">
+        <div class="overlay-content">
+            <h2 id="ready-player-name"></h2>
+            <p>Get ready for the next question!</p>
+        </div>
+    </div>
+
+    <div id="post-round-screen" class="overlay">
+         <div class="overlay-content">
+            <h2 id="round-over-title"></h2>
+            <h3>Current Standings:</h3>
+            <ul id="round-scores-container"></ul>
+            <div class="button-row">
+                <button id="continue-button" class="btn btn-primary">Next Round</button>
+                <button id="end-game-early-button" class="btn">End Game</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="end-screen" class="overlay">
+        <div class="overlay-content">
+            <h2 id="winner-announcement"></h2>
+            <h3>Final Scores:</h3>
+            <ul id="final-scores-container"></ul>
+            <button id="play-again-button" class="btn btn-primary">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Dźwięki -->
+    <audio id="correct-sound" src="data:audio/mpeg;base64,UklGRkFpAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABgAZGF0YQBpAAAA..."></audio>
+    <audio id="wrong-sound" src="data:audio/mpeg;base64,UklGRkFpAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABgAZGF0YQBpAAAA..."></audio>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+</html>
